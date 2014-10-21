@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<ui:composition template="/WEB-INF/template/layout.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
+	xmlns:o="http://omnifaces.org/ui"
+	xmlns:pt="http://java.sun.com/jsf/passthrough"
+	xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+<f:metadata>
+	<o:viewParam name="id" value="#{clienteHome.cliente}"/>
+</f:metadata>
+
+	<ui:define name="titulo">Administração de Clientes</ui:define>
+
+	<ui:define name="corpo">
+	
+		<h1>Cadastro de Cliente</h1>
+		<form jsf:id="frm" class="form-horizontal" role="form">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h3 class="panel-title">Dados Pessoais</h3>
+				</div>
+				<div class="panel-body">
+
+					<div class="form-group">
+						<label for="inputNome" class="col-sm-2 control-label">Nome:</label>
+						<div class="col-sm-10">
+							<input jsf:value="#{clienteHome.cliente.nome}" type="text"
+								class="form-control" id="inputNome" />
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="inputRg" class="col-sm-2 control-label">Rg:</label>
+						<div class="col-sm-10">
+							<input jsf:value="#{clienteHome.cliente.rg}" type="text"
+								class="form-control" id="inputRg" />
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="inputRg" class="col-sm-2 control-label">Sexo:</label>
+						<div class="col-sm-10">
+							<h:selectOneMenu value="#{clienteHome.cliente.sexo}">
+								<f:selectItems value="#{clienteHome.sexos}" />
+							</h:selectOneMenu>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="inputEndereco" class="col-sm-2 control-label">Endereço:</label>
+						<div class="col-sm-10">
+							<input jsf:value="#{clienteHome.cliente.endereco}"
+								type="text" class="form-control" id="inputEndereco" />
+						</div>
+					</div>
+					<h:commandButton value="Salvar"
+						action="#{clienteHome.salvar}" pt:class="btn btn-default"/>
+					<h:commandButton value="Cancelar" action="clienteList?faces-redirect=true" pt:class="btn btn-default"/>
+
+
+				</div>
+			</div>
+		</form>
+	</ui:define>
+
+</ui:composition>

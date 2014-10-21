@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<ui:composition template="/WEB-INF/template/layout.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
+	xmlns:pt="http://java.sun.com/jsf/passthrough"
+	xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+	<ui:define name="titulo">Consultar Clientes</ui:define>
+
+	<ui:define name="corpo">
+		<f:metadata>
+			<f:viewAction action="#{clienteList.consultar}" />
+		</f:metadata>
+		<h1>Consulta de Clientes</h1>
+		<h:form id="frmBusca" role="form">
+			<p:messages />
+		<div class="row clearfix">
+		<div class="col-md-6 column">
+			
+				<div class="form-group">
+					 <label for="nome">Nome:</label><input jsf:value="#{clienteList.nome}" type="text" class="form-control" id="nome" />
+				</div>
+			
+		</div>
+		<div class="col-md-6 column">
+			<br />
+			 <h:commandButton value="Buscar" action="#{clienteList.consultarPorNome}" pt:class="btn btn-default"/>
+		</div>
+	</div>
+		</h:form>
+		
+		<h:form id="frm" class="form-horizontal" role="form">
+			<p:dataTable id="dtClientes" var="cliente" rows="10" paginator="true"
+				value="#{clienteList.clientes}">
+				<p:column headerText="Id">
+					<h:outputText value="#{cliente.id}" />
+				</p:column>
+				<p:column headerText="Nome">
+					<p:link outcome="/cliente" value="#{cliente.nome}">
+						<f:param name="id" value="#{cliente.id}"/>
+					</p:link>
+				</p:column>
+				<p:column headerText="Rg">
+					<h:outputText value="#{cliente.rg}" />
+				</p:column>
+				<p:column headerText="Sexo">
+					<h:outputText value="#{cliente.sexo}" />
+				</p:column>
+				<p:column>
+					<p:commandButton icon="ui-icon-trash" title="Excluir" action="#{clienteList.excluir}" ajax="false">
+						<f:setPropertyActionListener value="#{cliente}" target="#{clienteList.cliente}" />
+					</p:commandButton>
+				</p:column>
+			</p:dataTable>
+			<br />
+			<h:commandButton value="Novo" action="cliente?faces-redirect=true" pt:class="btn btn-default"/>
+		</h:form>
+	</ui:define>
+
+</ui:composition>
