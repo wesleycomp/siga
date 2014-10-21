@@ -1,6 +1,0 @@
-*.class
-.metadata
-.settings
-.classpath
-.project
-target/
